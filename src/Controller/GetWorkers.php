@@ -19,7 +19,7 @@ class GetWorkers extends AbstractController
     }
 
     #[Route('/workers', name: 'get_workers', methods: ['GET'])]
-    public function index(): Response
+    public function __invoke(): Response
     {
         return $this->json($this->normalizer->normalize($this->workerRepository->findAll()));
     }
