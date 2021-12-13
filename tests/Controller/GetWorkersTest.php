@@ -24,7 +24,7 @@ final class GetWorkersTest extends WebTestCase
             $response->headers->get('Content-Type'),
         );
         static::assertSame(
-            '[{"id":1,"name":"John Doe"},{"id":2,"name":"Jane Doe"},{"id":3,"name":"Foo Bar"},{"id":4,"name":"Foo Bar-Chu"}]',
+            '[{"id":1,"name":"John Doe"},{"id":2,"name":"Jane Doe"},{"id":3,"name":"Foo Bar"}]',
             $response->getContent(),
         );
     }
