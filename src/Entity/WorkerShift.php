@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Repository\WorkerShiftRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: WorkerShiftRepository::class)]
 #[ORM\UniqueConstraint(fields: ['date', 'worker'])]
@@ -14,6 +15,7 @@ class WorkerShift
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_worker_shifts'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Worker::class)]
@@ -22,9 +24,11 @@ class WorkerShift
 
     #[ORM\ManyToOne(targetEntity: Shift::class)]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_worker_shifts'])]
     private Shift $shift;
 
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Groups(['get_worker_shifts'])]
     private \DateTimeImmutable $date;
 
     public function __construct()
