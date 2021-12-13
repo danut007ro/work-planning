@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\WorkerShift;
+use App\Request\GetWorkerShiftsRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -23,32 +24,19 @@ class WorkerShiftRepository extends ServiceEntityRepository
         parent::__construct($registry, WorkerShift::class);
     }
 
-    // /**
-    //  * @return WorkerShift[] Returns an array of WorkerShift objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return WorkerShift[]
+     */
+    public function findByGetWorkerShiftRequest(GetWorkerShiftsRequest $request): array
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $criteria = [];
+        if (null !== $request->worker) {
+            $criteria['worker'] = $request->worker;
+        }
+        if (null !== $request->date) {
+            $criteria['date'] = $request->date;
+        }
 
-    /*
-    public function findOneBySomeField($value): ?WorkerShift
-    {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findBy($criteria);
     }
-    */
 }

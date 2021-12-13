@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Worker;
 use App\Form\GetWorkerShiftsType;
 use App\Repository\WorkerShiftRepository;
+use App\Request\GetWorkerShiftsRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +21,8 @@ class GetWorkerShifts extends AbstractController
     ) {
     }
 
-    #[Route('/worker/{id}/shifts', name: 'get_worker_shifts', methods: ['GET'])]
-    public function __invoke(Worker $worker, Request $request): Response
+    #[Route('/worker-shifts', name: 'get_worker_shifts', methods: ['GET'])]
+    public function __invoke(Request $request): Response
     {
         // Create form and validate request.
         $form = $this->createForm(GetWorkerShiftsType::class);
@@ -30,17 +30,11 @@ class GetWorkerShifts extends AbstractController
             return $this->json($this->normalizer->normalize($form));
         }
 
-        /** @var ?\DateTimeInterface $date */
-        $date = $form['date']->getData();
-
-        // If `date` is specified, then use it as filter.
-        $findParams = ['worker' => $worker];
-        if (null !== $date) {
-            $findParams['date'] = $date;
-        }
+        /** @var GetWorkerShiftsRequest $data */
+        $data = $form->getData();
 
         return $this->json($this->normalizer->normalize(
-            $this->workerShiftRepository->findBy($findParams),
+            $this->workerShiftRepository->findByGetWorkerShiftRequest($data),
             'json',
             ['groups' => 'get_worker_shifts'],
         ));

@@ -20,6 +20,7 @@ class WorkerShift
 
     #[ORM\ManyToOne(targetEntity: Worker::class)]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_worker_shifts'])]
     private Worker $worker;
 
     #[ORM\ManyToOne(targetEntity: Shift::class)]
