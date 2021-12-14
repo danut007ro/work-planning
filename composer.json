@@ -76,11 +76,12 @@
         "php-cs-fixer": [
             "./vendor/bin/php-cs-fixer fix --allow-risky=yes"
         ],
-        "setup-tests": [
+        "phpunit": [
             "APP_ENV=test bin/console d:d:c --if-not-exists",
             "APP_ENV=test bin/console d:s:d --force",
             "APP_ENV=test bin/console d:s:u --force",
-            "APP_ENV=test bin/console d:f:l --purge-with-truncate --no-interaction"
+            "APP_ENV=test bin/console d:f:l --purge-with-truncate --no-interaction",
+            "./vendor/bin/phpunit"
         ]
     },
     "conflict": {

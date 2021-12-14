@@ -13,8 +13,7 @@ docker-compose exec php sh -c "bin/console d:f:l --purge-with-truncate --no-inte
 3. Run `phpstan`, `php-cs-fixer` and `phpunit`. The project is using [github actions](https://github.com/danut007ro/work-planning/actions).
 
 ```sh
-docker-compose exec php sh -c "composer php-cs-fixer ; composer phpstan"
-docker-compose exec php sh -c "composer setup-tests; ./vendor/bin/phpunit"
+docker-compose exec php sh -c "composer php-cs-fixer ; composer phpstan ; composer phpunit"
 ```
 
 4. Check endpoints:

@@ -34,4 +34,4 @@ jobs:
             - name: Run phpstan
               run: docker-compose exec -T php composer phpstan
             - name: Run phpunit
-              run: docker-compose exec php sh -c "composer setup-tests ; ./vendor/bin/phpunit"
+              run: docker-compose exec -T php composer phpunit
