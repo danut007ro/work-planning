@@ -10,20 +10,14 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml -f docker-co
 docker-compose exec php sh -c "bin/console d:f:l --purge-with-truncate --no-interaction"
 ```
 
-3. Run `phpstan` and `php-cs-fixer`
+3. Run `phpstan`, `php-cs-fixer` and `phpunit`. The project is using [github actions](https://github.com/danut007ro/work-planning/actions).
 
 ```sh
 docker-compose exec php sh -c "composer php-cs-fixer ; composer phpstan"
-```
-
-
-5. Run tests
-
-```sh
 docker-compose exec php sh -c "composer setup-tests; ./vendor/bin/phpunit"
 ```
 
-5. Check endpoints:
+4. Check endpoints:
 
 List shifts:
 
