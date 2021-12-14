@@ -29,3 +29,9 @@ jobs:
               run: curl http://localhost
             - name: Check HTTPS reachability
               run: curl -k https://localhost
+            - name: Run php-cs-fixer
+              run: docker-compose exec -T php composer php-cs-fixer
+            - name: Run phpstan
+              run: docker-compose exec -T php composer phpstan
+            - name: Run phpunit
+              run: docker-compose exec -T php ./vendor/bin/phpunit
