@@ -6,10 +6,12 @@ namespace App\Entity;
 
 use App\Repository\WorkerShiftRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: WorkerShiftRepository::class)]
 #[ORM\UniqueConstraint(fields: ['date', 'worker'])]
+#[UniqueEntity(fields: ['worker', 'date'])]
 class WorkerShift
 {
     #[ORM\Id]

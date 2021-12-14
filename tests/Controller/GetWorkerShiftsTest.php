@@ -32,7 +32,7 @@ final class GetWorkerShiftsTest extends WebTestCase
     public function testGetWorkerShiftsWithWorkerFilter(): void
     {
         $client = self::createClient();
-        $client->request('GET', '/worker-shifts?worker=4');
+        $client->request('GET', '/worker-shifts?worker=3');
         $response = $client->getResponse();
 
         $this->assertResponseIsSuccessful();

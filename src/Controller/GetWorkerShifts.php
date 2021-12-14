@@ -27,7 +27,7 @@ class GetWorkerShifts extends AbstractController
         // Create form and validate request.
         $form = $this->createForm(GetWorkerShiftsType::class);
         if (!$form->submit($request->query->all())->isValid()) {
-            return $this->json($this->normalizer->normalize($form));
+            return $this->json($this->normalizer->normalize($form), Response::HTTP_BAD_REQUEST);
         }
 
         /** @var GetWorkerShiftsRequest $data */
